@@ -1,0 +1,33 @@
+version: '3.7'
+
+networks:
+  default:
+    name: arkimenet
+
+services:
+  elasticsearch:
+    image: tanupoo/elasticsearch:7.10.1-arkime
+    hostname: eshost
+    restart: always
+    networks:
+      - default
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      discovery.type: single-node
+
+  arkime:
+    image: tanupoo/arkime:2.7.1b-viewer
+    hostname: arkime
+    restart: always
+    depends_on:
+      - elasticsearch
+    networks:
+      - default
+    ports:
+      - "8005:8005"
+    volumes:
+      - .:/upload
+    command: /opt/arkime/bin/node /opt/arkime/viewer/viewer.js -c /opt/arkime/etc/config.ini
+
