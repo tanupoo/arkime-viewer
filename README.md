@@ -1,3 +1,13 @@
+Docker: Arkime Viewer
+======================
+
+just run docker-compose up
+
+```
+git clone https://github.com/tanupoo/arkime-viewer
+cd arkime-viewer
+docker-compose up
+```
 
 you may see many messages like below:
 
